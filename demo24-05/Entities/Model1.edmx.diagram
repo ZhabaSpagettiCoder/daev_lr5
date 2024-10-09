@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3b62801d0159403a821336977e7cad07" Name="Diagram1">
+        <EntityTypeShape EntityType="user09Model.climantTechModel" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="user09Model.climantTechType" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="user09Model.comments" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="user09Model.requests" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="user09Model.requestStatus" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="user09Model.type" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="user09Model.users" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="user09Model.FK_requests_climantTechModel" ManuallyRouted="false" />
+        <AssociationConnector Association="user09Model.FK_requests_climantTechType" ManuallyRouted="false" />
+        <AssociationConnector Association="user09Model.FK_comments_requests" ManuallyRouted="false" />
+        <AssociationConnector Association="user09Model.FK_comments_users" ManuallyRouted="false" />
+        <AssociationConnector Association="user09Model.FK_requests_requestStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="user09Model.FK_requests_users" ManuallyRouted="false" />
+        <AssociationConnector Association="user09Model.FK_requests_users1" ManuallyRouted="false" />
+        <AssociationConnector Association="user09Model.FK_users_type" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="user09Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="climantTechModel">
+    <Key>
+      <PropertyRef Name="climantTechModelId" />
+    </Key>
+    <Property Name="climantTechModelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="requests" Relationship="Self.FK_requests_climantTechModel" FromRole="climantTechModel" ToRole="requests" />
+  </EntityType>
+  <EntityType Name="climantTechType">
+    <Key>
+      <PropertyRef Name="climantTechTypeId" />
+    </Key>
+    <Property Name="climantTechTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="requests" Relationship="Self.FK_requests_climantTechType" FromRole="climantTechType" ToRole="requests" />
+  </EntityType>
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MasterId" Type="Int32" Nullable="false" />
+    <Property Name="RequestId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="requests" Relationship="Self.FK_comments_requests" FromRole="comments" ToRole="requests" />
+    <NavigationProperty Name="users" Relationship="Self.FK_comments_users" FromRole="comments" ToRole="users" />
+  </EntityType>
+  <EntityType Name="requests">
+    <Key>
+      <PropertyRef Name="RequestId" />
+    </Key>
+    <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ClimateTechType" Type="Int32" Nullable="false" />
+    <Property Name="ClimateTechModel" Type="Int32" Nullable="false" />
+    <Property Name="ProblemDescryption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RequestStatus" Type="Int32" Nullable="false" />
+    <Property Name="CompletionDate" Type="DateTime" Precision="0" />
+    <Property Name="RepairParts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MasterID" Type="Int32" />
+    <Property Name="ClientID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="climantTechModel" Relationship="Self.FK_requests_climantTechModel" FromRole="requests" ToRole="climantTechModel" />
+    <NavigationProperty Name="climantTechType" Relationship="Self.FK_requests_climantTechType" FromRole="requests" ToRole="climantTechType" />
+    <NavigationProperty Name="comments" Relationship="Self.FK_comments_requests" FromRole="requests" ToRole="comments" />
+    <NavigationProperty Name="requestStatus1" Relationship="Self.FK_requests_requestStatus" FromRole="requests" ToRole="requestStatus" />
+    <NavigationProperty Name="users" Relationship="Self.FK_requests_users" FromRole="requests" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK_requests_users1" FromRole="requests" ToRole="users" />
+  </EntityType>
+  <EntityType Name="requestStatus">
+    <Key>
+      <PropertyRef Name="RequestStatusId" />
+    </Key>
+    <Property Name="RequestStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="requests" Relationship="Self.FK_requests_requestStatus" FromRole="requestStatus" ToRole="requests" />
+  </EntityType>
+  <EntityType Name="type">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="users" Relationship="Self.FK_users_type" FromRole="type" ToRole="users" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="comments" Relationship="Self.FK_comments_users" FromRole="users" ToRole="comments" />
+    <NavigationProperty Name="requests" Relationship="Self.FK_requests_users" FromRole="users" ToRole="requests" />
+    <NavigationProperty Name="requests1" Relationship="Self.FK_requests_users1" FromRole="users" ToRole="requests" />
+    <NavigationProperty Name="type1" Relationship="Self.FK_users_type" FromRole="users" ToRole="type" />
+  </EntityType>
+  <Association Name="FK_requests_climantTechModel">
+    <End Role="climantTechModel" Type="Self.climantTechModel" Multiplicity="1" />
+    <End Role="requests" Type="Self.requests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="climantTechModel">
+        <PropertyRef Name="climantTechModelId" />
+      </Principal>
+      <Dependent Role="requests">
+        <PropertyRef Name="ClimateTechModel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_requests_climantTechType">
+    <End Role="climantTechType" Type="Self.climantTechType" Multiplicity="1" />
+    <End Role="requests" Type="Self.requests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="climantTechType">
+        <PropertyRef Name="climantTechTypeId" />
+      </Principal>
+      <Dependent Role="requests">
+        <PropertyRef Name="ClimateTechType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comments_requests">
+    <End Role="requests" Type="Self.requests" Multiplicity="1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="requests">
+        <PropertyRef Name="RequestId" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="RequestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comments_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="MasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_requests_requestStatus">
+    <End Role="requestStatus" Type="Self.requestStatus" Multiplicity="1" />
+    <End Role="requests" Type="Self.requests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="requestStatus">
+        <PropertyRef Name="RequestStatusId" />
+      </Principal>
+      <Dependent Role="requests">
+        <PropertyRef Name="RequestStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_requests_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="requests" Type="Self.requests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="requests">
+        <PropertyRef Name="MasterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_requests_users1">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="requests" Type="Self.requests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="requests">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_users_type">
+    <End Role="type" Type="Self.type" Multiplicity="1" />
+    <End Role="users" Type="Self.users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="type">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="user09Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="climantTechModel" EntityType="Self.climantTechModel" />
+    <EntitySet Name="climantTechType" EntityType="Self.climantTechType" />
+    <EntitySet Name="comments" EntityType="Self.comments" />
+    <EntitySet Name="requests" EntityType="Self.requests" />
+    <EntitySet Name="requestStatus" EntityType="Self.requestStatus" />
+    <EntitySet Name="type" EntityType="Self.type" />
+    <EntitySet Name="users" EntityType="Self.users" />
+    <AssociationSet Name="FK_requests_climantTechModel" Association="Self.FK_requests_climantTechModel">
+      <End Role="climantTechModel" EntitySet="climantTechModel" />
+      <End Role="requests" EntitySet="requests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_requests_climantTechType" Association="Self.FK_requests_climantTechType">
+      <End Role="climantTechType" EntitySet="climantTechType" />
+      <End Role="requests" EntitySet="requests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comments_requests" Association="Self.FK_comments_requests">
+      <End Role="requests" EntitySet="requests" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comments_users" Association="Self.FK_comments_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_requests_requestStatus" Association="Self.FK_requests_requestStatus">
+      <End Role="requestStatus" EntitySet="requestStatus" />
+      <End Role="requests" EntitySet="requests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_requests_users" Association="Self.FK_requests_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="requests" EntitySet="requests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_requests_users1" Association="Self.FK_requests_users1">
+      <End Role="users" EntitySet="users" />
+      <End Role="requests" EntitySet="requests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_users_type" Association="Self.FK_users_type">
+      <End Role="type" EntitySet="type" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
